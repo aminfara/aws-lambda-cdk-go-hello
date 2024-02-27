@@ -1,0 +1,17 @@
+{
+  "folders": [
+    {
+      "path": "function"
+    },
+    {
+      "path": "infra"
+    },
+    {
+      "name": "root",
+      "path": "."
+    }
+  ],
+  "settings": {
+    "jest.runMode": "deferred"
+  }
+}
