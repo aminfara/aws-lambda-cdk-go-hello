@@ -1,7 +1,7 @@
 {
   "folders": [
     {
-      "path": "function"
+      "path": "functions/go-hello"
     },
     {
       "path": "infra"
