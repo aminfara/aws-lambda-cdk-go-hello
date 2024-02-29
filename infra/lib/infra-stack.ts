@@ -8,24 +8,42 @@ export class InfraStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    const lambdaFunction = new lambda.Function(this, "HelloLambda", {
+    const goLambdaFunction = new lambda.Function(this, "GoHelloLambda", {
       runtime: lambda.Runtime.PROVIDED_AL2023,
       architecture: lambda.Architecture.ARM_64,
       code: lambda.Code.fromAsset("../functions/go-hello/build/function.zip"),
       handler: "bootstrap",
     });
 
-    const lambdaIntegration = new HttpLambdaIntegration(
-      "lambdaIntegration",
-      lambdaFunction
+    const pyLambdaFunction = new lambda.Function(this, "PyHelloLambda", {
+      runtime: lambda.Runtime.PYTHON_3_12,
+      architecture: lambda.Architecture.ARM_64,
+      code: lambda.Code.fromAsset("../functions/py-hello/build/function.zip"),
+      handler: "handler.handler",
+    });
+
+    const goLambdaIntegration = new HttpLambdaIntegration(
+      "goLambdaIntegration",
+      goLambdaFunction
+    );
+
+    const pyLambdaIntegration = new HttpLambdaIntegration(
+      "pyLambdaIntegration",
+      pyLambdaFunction
     );
 
     const httpApi = new apigv2.HttpApi(this, "httpApi");
 
     httpApi.addRoutes({
-      path: "/{proxy+}",
+      path: "/go/{proxy+}",
       methods: [apigv2.HttpMethod.GET],
-      integration: lambdaIntegration,
+      integration: goLambdaIntegration,
+    });
+
+    httpApi.addRoutes({
+      path: "/py/{proxy+}",
+      methods: [apigv2.HttpMethod.GET],
+      integration: pyLambdaIntegration,
     });
   }
 }

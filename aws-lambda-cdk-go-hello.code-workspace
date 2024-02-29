@@ -4,6 +4,9 @@
       "path": "functions/go-hello"
     },
     {
+      "path": "functions/py-hello"
+    },
+    {
       "path": "infra"
     },
     {

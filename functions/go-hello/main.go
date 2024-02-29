@@ -17,7 +17,7 @@ func init() {
 	// stdout and stderr are sent to AWS CloudWatch Logs
 	log.Printf("Gin cold start")
 	r := gin.Default()
-	r.GET("/hello", func(c *gin.Context) {
+	r.GET("/go/hello", func(c *gin.Context) {
 		c.JSON(200, gin.H{
 			"message": "Hello from Go!",
 		})

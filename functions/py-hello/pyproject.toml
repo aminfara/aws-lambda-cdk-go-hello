@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "pyhello"
+version = "0.1.0"
+description = ""
+authors = ["Ali Aminfar"]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = {extras = ["all"], version = "^0.110.0"}
+uvicorn = "^0.27.1"
+mangum = "^0.17.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
